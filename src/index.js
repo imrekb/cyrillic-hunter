@@ -21,8 +21,8 @@ program
 
     run(program.include, program.exclude, program.directory)
         .then((files) => {
-            // console.log('Unlocalized files (contain cyrillic):')
-            // console.log();
+            console.log('Non-localized files (contain cyrillic):')
+            console.log();
             files.forEach((file) => {
                 console.log(file);
             });
