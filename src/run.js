@@ -2,12 +2,14 @@ const readdir = require('recursive-readdir');
 const path = require('path');
 const fs = require('fs');
 
-module.exports = (program, workingDir) => {
+module.exports = (include, exclude, directory = '.') => {
+    const workingDirectory = path.join('.', directory);
+
     const ignoreFunc = (file, stats) => {
         const regexpCyrillic = /[А-Яа-яЁё]/;
-        
-        if (program.exclude) {
-            const regexpExcluding = new RegExp(program.exclude);
+
+        if (exclude) {
+            const regexpExcluding = new RegExp(exclude);
             const isExcluding = regexpExcluding.test(file);
 
             if (isExcluding) { 
@@ -15,8 +17,8 @@ module.exports = (program, workingDir) => {
             }
         }
 
-        if (program.include && stats.isFile()) {
-            const regexpIncluding = new RegExp(program.include);
+        if (include && stats.isFile()) {
+            const regexpIncluding = new RegExp(include);
             const isIncluding = regexpIncluding.test(file);
 
             if (!isIncluding) {
@@ -34,5 +36,5 @@ module.exports = (program, workingDir) => {
         return false;
     };
 
-    return readdir('./', [ignoreFunc]);
+    return readdir(workingDirectory, [ignoreFunc]);
 }
