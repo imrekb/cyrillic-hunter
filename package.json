@@ -1,0 +1,27 @@
+{
+  "name": "cyrillic-hunter",
+  "version": "0.1.0",
+  "description": "Finds unlocalized files in project",
+  "main": "src/index.js",
+  "bin": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imrekb/cyrillic-hunter.git"
+  },
+  "keywords": [],
+  "author": "Oleg Ulyanov <imrekbg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imrekb/cyrillic-hunter/issues",
+    "bugs": "imrekbg@gmail.com"
+  },
+  "homepage": "https://github.com/imrekb/cyrillic-hunter#readme",
+  "dependencies": {
+    "commander": "2.13.0",
+    "recursive-readdir": "^2.2.1"
+  }
+}
