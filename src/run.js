@@ -7,6 +7,8 @@ module.exports = (include, exclude, directory = '.') => {
 
     const ignoreFunc = (file, stats) => {
         const regexpCyrillic = /[А-Яа-яЁё]/;
+        const regexpCommentsJS = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm;
+        const regexpCommentsHtml = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*|<!--[\s\S]*?-->$/gm;
 
         if (exclude) {
             const regexpExcluding = new RegExp(exclude);
@@ -28,9 +30,19 @@ module.exports = (include, exclude, directory = '.') => {
 
         if (stats.isFile()) {
             const content = fs.readFileSync(file, 'utf8');
-            const isCyrillic = regexpCyrillic.test(content);
+            let clearedContent = '';
 
-            return isCyrillic;
+            if (['.html', '.htm'].indexOf(path.extname(file)) !== -1) {
+                clearedContent = content.replace(regexpCommentsHtml, '');
+            }
+
+            if (['.js', '.ts'].indexOf(path.extname(file)) !== -1) {
+                clearedContent = content.replace(regexpCommentsJS, '$1');
+            }
+
+            const isCyrillic = regexpCyrillic.test(clearedContent);
+
+            return !isCyrillic;
         }
 
         return false;
