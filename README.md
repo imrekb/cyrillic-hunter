@@ -1,2 +1,2 @@
 # cyrillic-hunter
-Finds unlocalized files in project
+Finds non-localized files in project
