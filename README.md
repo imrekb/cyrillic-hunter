@@ -1,5 +1,9 @@
 # cyrillic-hunter
 
+**Installation**
+
+`npm install -g cyrillic-hunter`
+
 Finds non-localized files in project.
   
 **Usage: cyrillic-hunter [options]**
